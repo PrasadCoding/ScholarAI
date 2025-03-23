@@ -7,7 +7,7 @@ with col1:
     st.title("📚 AI Research Assistant")
 
 with col2:
-    dark_mode = st.toggle(" ", value=True)  # Empty text keeps only emoji
+    dark_mode = st.toggle("🌗", value=True)  # Empty text keeps only emoji
 
 # Apply Theme Based on Selection
 if dark_mode:
@@ -24,7 +24,6 @@ if dark_mode:
             .st-bf { transform: translateY(-3px); }  /* Adjust switch position */
         </style>
     """, unsafe_allow_html=True)
-    col2.markdown("🌙")  # Moon emoji for dark mode
 else:
     st.markdown("""
         <style>
@@ -39,17 +38,5 @@ else:
             .st-bf { transform: translateY(-3px); }  /* Adjust switch position */
         </style>
     """, unsafe_allow_html=True)
-    col2.markdown("☀️")  # Sun emoji for light mode
 
-# Sidebar Navigation
-st.sidebar.title("🔍 Navigation")
-page = st.sidebar.radio("Go to", ["Home", "Upload Paper", "Ask Questions"])
 
-if page == "Home":
-    st.write("Welcome to the AI Research Assistant!")
-elif page == "Upload Paper":
-    uploaded_file = st.sidebar.file_uploader("Upload a PDF", type="pdf")
-    if uploaded_file:
-        st.success("PDF Uploaded Successfully! (Processing will be added soon)")
-elif page == "Ask Questions":
-    st.write("Ask questions about the uploaded paper!")
