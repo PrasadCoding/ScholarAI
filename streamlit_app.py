@@ -38,6 +38,10 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("##")
-st.markdown("### Upload a PDF")
+st.markdown("###")
+st.markdown("""
+<div style="font-size: 18px; color: {font_color};">
+   Upload a PDF
+</div>
+""", unsafe_allow_html=True)
 uploaded_file = st.file_uploader("", type="pdf")
