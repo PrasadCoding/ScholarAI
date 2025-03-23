@@ -1,29 +1,41 @@
 import streamlit as st
 
-# Set default theme (Light theme color first)
-theme_color = "#ECF0F1"  # Light theme color
+# Set up the layout of the page with the title and a toggle button for theme
+st.set_page_config(page_title="ScholarAI", layout="wide")
 
-# Add a toggle switch on the top right for theme selection
-col1, col2 = st.columns([3, 1])  # Create two columns
+# Create columns for title and toggle switch
+col1, col2 = st.columns([6, 1])
+with col1:
+    st.title("ScholarAI")
 with col2:
-    # Toggle theme with a radio button
-    theme_toggle = st.radio("", ["Light", "Dark"], index=0, key="theme_toggle", horizontal=True)
+    # Create a toggle switch using checkbox
+    theme_toggle = st.checkbox("🌙 Dark Mode", value=False)
 
-# Change theme color based on toggle selection
-if theme_toggle == "Dark":
-    theme_color = "#34495E"  # Dark theme color
+# Set the background color based on the toggle state
+if theme_toggle:
+    st.markdown(
+        """
+        <style>
+        .reportview-container {
+            background-color: #2C3E50;
+            color: white;
+        }
+        </style>
+        """, 
+        unsafe_allow_html=True
+    )
+else:
+    st.markdown(
+        """
+        <style>
+        .reportview-container {
+            background-color: #ECF0F1;
+            color: black;
+        }
+        </style>
+        """, 
+        unsafe_allow_html=True
+    )
 
-# Apply custom background color based on theme
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background-color: {theme_color};
-    }}
-    </style>
-    """, 
-    unsafe_allow_html=True
-)
-
-# Title
-st.title("📚 AI Research Assistant")
+# Main content of the page
+st.write("Welcome to ScholarAI! Toggle between Dark and Light themes using the switch.")
