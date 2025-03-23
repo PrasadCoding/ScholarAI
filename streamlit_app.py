@@ -38,4 +38,5 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
+st.markdown("##")
 uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
