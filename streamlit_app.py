@@ -25,6 +25,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.markdown('#')
 st.markdown(f"""
 <div style="text-align: center;">
     <h3 style="font-weight: bold; color: {font_color};">Welcome to ScholarAI!</h3>
