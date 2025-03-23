@@ -38,5 +38,5 @@ st.markdown(
 st.markdown(f"""
 ### Welcome to ScholarAI!
 
-ScholarAI is an AI-powered research assistant designed to help you with your research papers. You can upload a research paper, and ScholarAI will assist you in answering questions, summarizing key points, or analyzing the paper's content. It’s like having a virtual assistant for your academic needs!
+#### ScholarAI is an AI-powered research assistant designed to help you with your research papers. You can upload a research paper, and ScholarAI will assist you in answering questions, summarizing key points, or analyzing the paper's content. It’s like having a virtual assistant for your academic needs!
 """)
