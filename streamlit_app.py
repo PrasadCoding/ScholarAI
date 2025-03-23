@@ -37,3 +37,5 @@ st.markdown(f"""
     key points, or analyzing the paper's content. It’s like having a virtual assistant for your academic needs!
 </div>
 """, unsafe_allow_html=True)
+
+uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
