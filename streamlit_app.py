@@ -25,18 +25,14 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.markdown(
-    f"""
-    <div style="text-align: center; padding: 20px;">
-        <h2 style="color: {font_color};">Welcome to ScholarAI!</h2>
-        <p style="color: {font_color}; font-size: 18px;">ScholarAI is an AI-powered research assistant designed to help you with your research papers. You can upload a research paper, and ScholarAI will assist you in answering questions, summarizing key points, or analyzing the paper's content. It’s like having a virtual assistant for your academic needs!</p>
-    </div>
-    """, 
-    unsafe_allow_html=True
-)
-
 st.markdown(f"""
-### Welcome to ScholarAI!
+<div style="text-align: center;">
+    <h3 style="font-weight: bold; color: {font_color};">Welcome to ScholarAI!</h3>
+</div>
 
-#### ScholarAI is an AI-powered research assistant designed to help you with your research papers. You can upload a research paper, and ScholarAI will assist you in answering questions, summarizing key points, or analyzing the paper's content. It’s like having a virtual assistant for your academic needs!
-""")
+<div style="text-align: justify; font-size: 18px; color: {font_color};">
+    ScholarAI is an AI-powered research assistant designed to help you with your research papers. 
+    You can upload a research paper, and ScholarAI will assist you in answering questions, summarizing 
+    key points, or analyzing the paper's content. It’s like having a virtual assistant for your academic needs!
+</div>
+""", unsafe_allow_html=True)
