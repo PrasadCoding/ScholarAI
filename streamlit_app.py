@@ -1,34 +1,64 @@
 import streamlit as st
 
-# Initialize session state for theme if not set
+# Initialize session state for theme
 if "dark_mode" not in st.session_state:
-    st.session_state.dark_mode = True  # Default to dark mode
+    st.session_state.dark_mode = True  # Default: Dark Mode
 
-# Create layout with title and toggle switch on the same line
+# Custom CSS for Dark and Light Mode
+dark_theme = """
+<style>
+    body {
+        background-color: #202020;
+        color: #F0F0F0;
+    }
+    .stApp {
+        background-color: #202020;
+        color: #F0F0F0;
+    }
+    .stButton, .stRadio, .stTextInput, .stFileUploader {
+        background-color: #2E2E2E;
+        color: #F0F0F0;
+    }
+    .stButton:hover, .stRadio:hover, .stTextInput:hover, .stFileUploader:hover {
+        background-color: #3C3C3C;
+    }
+</style>
+"""
+
+light_theme = """
+<style>
+    body {
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+    .stApp {
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+    .stButton, .stRadio, .stTextInput, .stFileUploader {
+        background-color: #F1F1F1;
+        color: #000000;
+    }
+    .stButton:hover, .stRadio:hover, .stTextInput:hover, .stFileUploader:hover {
+        background-color: #E0E0E0;
+    }
+</style>
+"""
+
+# Layout: Title and Toggle Button on the same line with 🌗 emoji
 col1, col2 = st.columns([8, 1])
 
 with col1:
     st.title("📚 AI Research Assistant")
 
 with col2:
-    # Toggle without forcing rerun
-    st.session_state.dark_mode = st.toggle(" ", value=st.session_state.dark_mode, key="theme_toggle")
+    st.session_state.dark_mode = st.toggle("🌗", value=st.session_state.dark_mode, key="theme_toggle")
 
-# Apply Theme Dynamically
-theme = "dark" if st.session_state.dark_mode else "light"
+# Apply the selected theme using CSS
+if st.session_state.dark_mode:
+    st.markdown(dark_theme, unsafe_allow_html=True)
+else:
+    st.markdown(light_theme, unsafe_allow_html=True)
 
-# Display message
-st.write(f"🌗 Current Theme: **{theme.capitalize()} Mode**")
-
-# Sidebar Navigation
-st.sidebar.title("🔍 Navigation")
-page = st.sidebar.radio("Go to", ["Home", "Upload Paper", "Ask Questions"])
-
-if page == "Home":
-    st.write("Welcome to the AI Research Assistant!")
-elif page == "Upload Paper":
-    uploaded_file = st.sidebar.file_uploader("Upload a PDF", type="pdf")
-    if uploaded_file:
-        st.success("PDF Uploaded Successfully! (Processing will be added soon)")
-elif page == "Ask Questions":
-    st.write("Ask questions about the uploaded paper!")
+# Home page content
+st.write("Welcome to the **AI Research Assistant**! Use the toggle to switch themes.")
