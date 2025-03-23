@@ -23,7 +23,7 @@ st.markdown(
         background-color: {theme_color};
         color: {font_color};
     }}
-    .css-1d391kg {{
+    .st-emotion-cache-6qob1r e1tphpha8 {{
         background-color: {sidebar_color};
     }}
     </style>
