@@ -7,16 +7,18 @@ with col2:
     on = st.toggle("🌗")
 
 if on:
-    theme_color = "#2C3E50"  
+    theme_color = "#2C3E50"
+    font_color = "#ECF0F1"
 else:
     theme_color = "#ECF0F1"
-
+    font_color = "#2C3E50"
 
 st.markdown(
     f"""
     <style>
     .stApp {{
         background-color: {theme_color};
+        color: {font_color};
     }}
     </style>
     """, 
