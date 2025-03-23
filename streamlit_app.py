@@ -40,4 +40,4 @@ st.markdown(f"""
 
 st.markdown("##")
 st.markdown("### Upload a PDF")
-uploaded_file = st.file_uploader(type="pdf")
+uploaded_file = st.file_uploader("", type="pdf")
