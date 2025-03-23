@@ -7,15 +7,12 @@ with col2:
     on = st.toggle("🌗")
 
 if on:
-    theme_color = "#2C3E50"  # Dark theme background
-    font_color = "#ECF0F1"   # Light text for dark theme
-    sidebar_color = "#34495E"  # Darker sidebar color
+    theme_color = "#2C3E50"
+    font_color = "#ECF0F1"
 else:
-    theme_color = "#ECF0F1"  # Light theme background
-    font_color = "#2C3E50"   # Dark text for light theme
-    sidebar_color = "#BDC3C7"  # Lighter sidebar color
+    theme_color = "#ECF0F1"
+    font_color = "#2C3E50"
 
-# Apply background color for the main page and sidebar
 st.markdown(
     f"""
     <style>
@@ -23,15 +20,12 @@ st.markdown(
         background-color: {theme_color};
         color: {font_color};
     }}
-    .st-emotion-cache-6qob1r e1tphpha8 {{
-        background-color: {sidebar_color};
-    }}
     </style>
     """, 
     unsafe_allow_html=True
 )
 
-# Main page content
+st.markdown('#')
 st.markdown(f"""
 <div style="text-align: center;">
     <h3 style="font-weight: bold; color: {font_color};">Welcome to ScholarAI!</h3>
@@ -44,7 +38,7 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# File uploader section
 st.markdown("###")
 st.markdown("""<div style="font-size: 18px; color: {font_color};">Upload a PDF</div>""", unsafe_allow_html=True)
 uploaded_file = st.file_uploader("", type="pdf")
+
