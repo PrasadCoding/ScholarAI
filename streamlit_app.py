@@ -1,7 +1,13 @@
 import streamlit as st
 
-# Toggle Button for Theme
-dark_mode = st.toggle("🌗 Toggle Dark Mode", value=True)
+# Create a row layout for the title and toggle switch
+col1, col2 = st.columns([8, 1])  # Adjust column width ratios
+
+with col1:
+    st.title("📚 AI Research Assistant")
+
+with col2:
+    dark_mode = st.toggle(" ", value=True)  # Empty text keeps only emoji
 
 # Apply Theme Based on Selection
 if dark_mode:
@@ -15,8 +21,10 @@ if dark_mode:
                 background-color: #161a23;
                 color: white;
             }
+            .st-bf { transform: translateY(-3px); }  /* Adjust switch position */
         </style>
     """, unsafe_allow_html=True)
+    col2.markdown("🌙")  # Moon emoji for dark mode
 else:
     st.markdown("""
         <style>
@@ -28,14 +36,14 @@ else:
                 background-color: #f0f2f6;
                 color: black;
             }
+            .st-bf { transform: translateY(-3px); }  /* Adjust switch position */
         </style>
     """, unsafe_allow_html=True)
+    col2.markdown("☀️")  # Sun emoji for light mode
 
 # Sidebar Navigation
 st.sidebar.title("🔍 Navigation")
 page = st.sidebar.radio("Go to", ["Home", "Upload Paper", "Ask Questions"])
-
-st.title("📚 AI Research Assistant")
 
 if page == "Home":
     st.write("Welcome to the AI Research Assistant!")
