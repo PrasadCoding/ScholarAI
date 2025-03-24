@@ -3,8 +3,11 @@ from streamlit_option_menu import option_menu
 
 with st.sidebar:
     selected = option_menu(
-        menu_title = "Navigation",
-        options = ["Home", "Chatbot"]
+        menu_title = None,
+        options = ["Home", "Chatbot"],
+        #icons = []
+        default_index = 0,
+        orientation = "horizontal"
     )
 
 if selected == "Home":
