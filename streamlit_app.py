@@ -3,7 +3,7 @@ from streamlit_option_menu import option_menu
 
 with st.sidebar:
     selected = option_menu(
-        menu_title = "Navigation"
+        menu_title = "Navigation",
         options = ["Home", "Chatbot"]
     )
 
