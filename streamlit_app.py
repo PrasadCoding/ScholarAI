@@ -5,7 +5,7 @@ chatbot_page = st.Page(
     title = "chatbot",
 )
 
-pg = st.navigation(pages = [chatbot])
+pg = st.navigation(pages = [chatbot_page])
 pg.run
 
 col1, col2 = st.columns([4, 1])
