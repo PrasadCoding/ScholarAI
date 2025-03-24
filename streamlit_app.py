@@ -1,15 +1,15 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
-with st.sidebar:
-    selected = option_menu(
-        menu_title = None,
-        options = ["Home", "Chatbot"],
-        #icons = []
-        default_index = 0,
-        orientation = "horizontal"
-    )
+selected = option_menu(
+    menu_title = None,
+    options = ["Home", "Chatbot"],
+    #icons = []
+    default_index = 0,
+    orientation = "horizontal"
+)
 
+   
 if selected == "Home":
     col1, col2 = st.columns([4, 1])
     with col1:
