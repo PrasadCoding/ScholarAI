@@ -1,32 +1,7 @@
 import streamlit as st
 from streamlit_navigation_bar import st_navbar
 
-st.set_page_config(initial_sidebar_state="collapsed")
-
-col1, col2 = st.columns([4, 1])
-with col1:
-    st.title("ScholarAI")
-with col2:
-    on = st.toggle("🌗")
-
-if on:
-    theme_color = "#2C3E50"
-    font_color = "#ECF0F1"
-else:
-    theme_color = "#ECF0F1"
-    font_color = "#2C3E50"
-
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background-color: {theme_color};
-        color: {font_color};
-    }}
-    </style>
-    """, 
-    unsafe_allow_html=True
-)
+st.set_page_config(page_title="ScholarAI", initial_sidebar_state="collapsed")
 
 pages = ["Home", "Library", "Tutorials", "Development", "Download"]
 styles = {
@@ -50,36 +25,39 @@ styles = {
     },
 }
 
-page = st_navbar(pages, styles=styles)
+# Ensuring navbar renders once
+if "page" not in st.session_state:
+    st.session_state.page = st_navbar(pages, styles=styles)
+else:
+    st.session_state.page = st_navbar(pages, styles=styles)
 
-if page == "Home":
-    st.markdown(f"""
-    <div style="text-align: center;">
-        <h3 style="font-weight: bold; color: {font_color};">Welcome to ScholarAI!</h3>
-    </div>
+st.write(f"### {st.session_state.page}")
 
-    <div style="text-align: center; font-size: 18px; color: {font_color};">
-        ScholarAI is an AI-powered research assistant designed to help you with your research papers. 
-        You can upload a research paper, and ScholarAI will assist you in answering questions, summarizing 
-        key points, or analyzing the paper's content. It’s like having a virtual assistant for your academic needs!
-    </div>
+# Page Content Based on Selection
+if st.session_state.page == "Home":
+    st.markdown("""
+        <div style="text-align: center;">
+            <h3><b>Welcome to ScholarAI!</b></h3>
+            <p style="font-size: 18px;">
+                ScholarAI is an AI-powered research assistant designed to help you with research papers. 
+                Upload a paper, and ScholarAI will assist you in answering questions, summarizing key points, 
+                and analyzing content.
+            </p>
+        </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("###")
-    st.markdown(f"""<div style="font-size: 18px; color: {font_color};">Upload a PDF</div>""", unsafe_allow_html=True)
-    uploaded_file = st.file_uploader("", type="pdf")
+elif st.session_state.page == "Library":
+    st.write("📚 Welcome to the Library!")
 
-elif page == "Library":
-    st.write("This is the Library Page.")
+elif st.session_state.page == "Tutorials":
+    st.write("📖 Explore our Tutorials!")
 
-elif page == "Tutorials":
-    st.write("This is the Tutorials Page.")
+elif st.session_state.page == "Development":
+    st.write("🛠️ Development Section!")
 
-elif page == "Development":
-    st.write("This is the Development Page.")
+elif st.session_state.page == "Download":
+    st.write("⬇️ Download Resources!")
 
-elif page == "Download":
-    st.write("This is the Download Page.")
-
+# Sidebar Content
 with st.sidebar:
-    st.write("Sidebar")
+    st.write("Sidebar Content")
