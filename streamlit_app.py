@@ -1,12 +1,8 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
 
-selected = option_menu(
-    menu_title = None,
-    options = ["Home", "Chatbot"],
-    #icons = []
-    default_index = 0,
-    orientation = "horizontal"
+chatbot_page = st.Page(
+    page = "views/chatbot.py",
+    title = "chatbot",
 )
 
    
