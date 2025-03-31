@@ -1,18 +1,14 @@
 import streamlit as st
 
-col1, col2 = st.columns([4, 1])
-with col1:
-    st.title("ScholarAI")
-with col2:
-    on = st.toggle("🌗")
-
-if on:
-    theme_color = "#2C3E50"
-    font_color = "#ECF0F1"
+# Retrieve theme settings from session state
+if "theme_color" in st.session_state and "font_color" in st.session_state:
+    theme_color = st.session_state["theme_color"]
+    font_color = st.session_state["font_color"]
 else:
     theme_color = "#ECF0F1"
     font_color = "#2C3E50"
 
+# Apply theme styles
 st.markdown(
     f"""
     <style>
@@ -25,7 +21,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# Page title
+st.title("Chatbot")
 
+# Chat input field
 prompt = st.chat_input("Say something")
+
+# Display user input (for now, no response logic)
 if prompt:
-    st.write(f"User has sent the following prompt: {prompt}")
+    st.write(f"**You:** {prompt}")
