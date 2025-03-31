@@ -41,3 +41,8 @@ st.markdown(f"""
 st.markdown("###")
 st.markdown("""<div style="font-size: 18px; color: {font_color};">Upload a PDF</div>""", unsafe_allow_html=True)
 uploaded_file = st.file_uploader("", type="pdf")
+
+if uploaded_file:
+    # Store file in session state
+    st.session_state["uploaded_pdf"] = uploaded_file
+    st.switch_page("Chatbot.py")
