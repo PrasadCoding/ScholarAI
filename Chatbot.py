@@ -70,7 +70,7 @@ def process_pdf(pdf_file):
 
     return vector_store
 
-if pdf_file:
+if "uploaded_pdf" in st.session_state:
     processed_file = process_pdf(pdf_file)
     st.write(processed_file)
 
