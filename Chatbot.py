@@ -28,6 +28,9 @@ st.markdown(
         padding: 8px;
         font-size: 16px;
     }}
+    .stChatInput div {{
+        background-color: {theme_color};
+    }}
     </style>
     """, 
     unsafe_allow_html=True
