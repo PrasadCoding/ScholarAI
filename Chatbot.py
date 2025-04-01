@@ -21,8 +21,8 @@ st.markdown(
         color: {font_color};
     }}
    .stTextInput {{
-        position: absolute;
-        bottom: 0;
+        position: fixed;
+        bottom: 10px;
         width: 100%;
        
     }}
