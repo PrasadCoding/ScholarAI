@@ -65,11 +65,12 @@ def process_pdf(pdf_file):
     text_chunks = text_splitter.split_text(raw_text)
 
     # Generate embeddings and store them in FAISS
-    embeddings = OpenAIEmbeddings()
+    embeddings = OpenAIEmbeddings(openai_api_key="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")
     vector_store = FAISS.from_texts(texts=text_chunks, embedding=embeddings)
 
     return vector_store
 
-processed_file = process_pdf(pdf_file)
-st.write(processed_file)
+if pdf_file:
+    processed_file = process_pdf(pdf_file)
+    st.write(processed_file)
 
