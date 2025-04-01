@@ -21,7 +21,11 @@ st.markdown(
         color: {font_color};
     }}
    .stTextInput {{
-        transform: translateY(500%);
+        position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 10px;
+      box-sizing: border-box;
        
     }}
     </style>
