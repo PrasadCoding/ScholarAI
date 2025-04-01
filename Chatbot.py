@@ -33,7 +33,7 @@ st.markdown(
 )
 
 # Chat input field
-prompt = st.text_input(placeholder = "How can I help you!")
+prompt = st.text_input("", placeholder = "How can I help you!")
 
 if "pdf_file" in st.session_state:
     pdf_file = st.session_state["pdf_file"]
