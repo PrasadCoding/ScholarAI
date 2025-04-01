@@ -23,8 +23,8 @@ st.markdown(
    .stTextInput {{
         position: fixed;
         bottom: 10px;
-        width: 20%;
-        transform: translateX(-50%);
+        width: 50%;
+
        
     }}
     </style>
