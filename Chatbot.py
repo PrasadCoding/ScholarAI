@@ -20,7 +20,7 @@ st.markdown(
         background-color: {theme_color};
         color: {font_color};
     }}
-    .bottom-input {{
+   .stTextInput {{
         position: fixed;
         bottom: 10px;
         left: 50%;
@@ -32,11 +32,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Chat input field aligned at the bottom
-st.markdown('<div class="bottom-input">', unsafe_allow_html=True)
+# Chat input field
 prompt = st.text_input("How can I help you today?")
-st.markdown('</div>', unsafe_allow_html=True)
 
-# Display user input (for now, no response logic)
+# Display user input
 if prompt:
     st.write(f"**You:** {prompt}")
