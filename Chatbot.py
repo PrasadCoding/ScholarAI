@@ -42,3 +42,30 @@ else:
     st.write("No PDF uploaded yet.")
 
 
+def process_pdf(pdf_file):
+    """Extracts text from the uploaded PDF, splits it into chunks, and stores embeddings in FAISS."""
+    
+    # Extract text from the PDF
+    raw_text = ""
+    pdf_reader = PdfReader(pdf_file)
+    for page in pdf_reader.pages:
+        raw_text += page.extract_text()
+
+    # Split text into chunks
+    text_splitter = CharacterTextSplitter(
+        separator="\n",
+        chunk_size=1000,
+        chunk_overlap=200,
+        length_function=len
+    )
+    text_chunks = text_splitter.split_text(raw_text)
+
+    # Generate embeddings and store them in FAISS
+    embeddings = OpenAIEmbeddings()
+    vector_store = FAISS.from_texts(texts=text_chunks, embedding=embeddings)
+
+    return vector_store
+
+processed_file = process_pdf(pdf_file)
+st.write(processed_file)
+
