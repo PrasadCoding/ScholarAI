@@ -1,4 +1,8 @@
 import streamlit as st
+from PyPDF2 import PdfReader
+from langchain.text_splitter import CharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
 
 col1, col2 = st.columns([4, 1])
 with col1:
