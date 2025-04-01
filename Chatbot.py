@@ -22,10 +22,10 @@ st.markdown(
     }}
    .stTextInput {{
         position: absolute;
-      bottom: 0;
-      left: 0;
-      padding: 10px;
-      box-sizing: border-box;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%); /* Center the input horizontally */
+        width: 80%;
        
     }}
     </style>
