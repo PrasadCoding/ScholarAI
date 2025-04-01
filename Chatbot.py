@@ -21,7 +21,7 @@ st.markdown(
         color: {font_color};
     }}
    .stTextInput {{
-        transform: translateY(-10%);
+        transform: translateY(-1%);
        
     }}
     </style>
