@@ -1,2 +1,8 @@
 streamlit>=1.26.0
 streamlit-option-menu
+PyPDF2
+langchain
+langchain_openai
+langchain_community
+faiss-cpu
+openai
