@@ -22,7 +22,6 @@ st.markdown(
     }}
    .stTextInput {{
         position: relative;
-        top: 100%;
         transform: translateY(-100%);
         width: 100%;
         
