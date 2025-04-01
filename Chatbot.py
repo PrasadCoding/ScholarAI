@@ -23,7 +23,7 @@ st.markdown(
    .stTextInput {{
         position: relative;
         width: 100%;
-        bottom: 1%;
+        bottom: 1px;
        
     }}
     </style>
