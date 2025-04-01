@@ -23,9 +23,7 @@ st.markdown(
    .stTextInput {{
         position: absolute;
         bottom: 0;
-        left: 50%;
-        transform: translateX(-50%); /* Center the input horizontally */
-        width: 80%;
+        width: 100%;
        
     }}
     </style>
