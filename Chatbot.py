@@ -35,7 +35,7 @@ st.markdown(
 # Chat input field
 prompt = st.text_input("", placeholder = "How can I help you!")
 
-if "pdf_file" in st.session_state:
+if "uploaded_pdf" in st.session_state:
     pdf_file = st.session_state["pdf_file"]
     st.write(f"PDF file '{pdf_file.name}' is accessible in Chatbot page.")
 else:
