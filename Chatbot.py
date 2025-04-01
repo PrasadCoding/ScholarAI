@@ -20,31 +20,20 @@ st.markdown(
         background-color: {theme_color};
         color: {font_color};
     }}
-    .chat-container {{
+    .bottom-input {{
         position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: {theme_color};
-        padding: 10px;
-        border-top: 1px solid {font_color};
-    }}
-    .chat-container input {{
-        width: 100%;
-        padding: 10px;
-        border: 1px solid {font_color};
-        border-radius: 8px;
-        font-size: 16px;
-        background-color: {theme_color};
-        color: {font_color};
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
     }}
     </style>
-    """,
+    """, 
     unsafe_allow_html=True
 )
 
-# Chat input field at the bottom
-st.markdown('<div class="chat-container">', unsafe_allow_html=True)
+# Chat input field aligned at the bottom
+st.markdown('<div class="bottom-input">', unsafe_allow_html=True)
 prompt = st.text_input("How can I help you today?")
 st.markdown('</div>', unsafe_allow_html=True)
 
