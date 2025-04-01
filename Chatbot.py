@@ -24,6 +24,7 @@ st.markdown(
         position: fixed;
         bottom: 10px;
         width: 80%;
+        transform: translateX(-50%);
        
     }}
     </style>
