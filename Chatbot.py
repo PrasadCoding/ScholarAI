@@ -26,7 +26,7 @@ st.markdown(
 )
 
 # Chat input field
-prompt = st.chat_input("Say something")
+query = st.text_input("How can I help you today?")
 
 # Display user input (for now, no response logic)
 if prompt:
