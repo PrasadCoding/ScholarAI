@@ -47,6 +47,14 @@ if uploaded_file:
 
 st.write("")
 
+st.markdown("""
+    <style>
+    div.stButton > button {
+        color: red; /* Change this to any color you want */
+        font-weight: bold;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 # Always show button
 col1, col2, col3 = st.columns([2, 1, 2])
 with col2:
