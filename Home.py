@@ -20,6 +20,14 @@ st.markdown(
         background-color: {theme_color};
         color: {font_color};
     }}
+        /* Widget labels */
+    label, .stTextInput label, .stFileUploader label, .stMarkdown p {{
+        color: {font_color} !important;
+    }}
+    /* Buttons */
+    button[kind="primary"] {{
+        color: {font_color} !important;
+    }}
     </style>
     """, 
     unsafe_allow_html=True
