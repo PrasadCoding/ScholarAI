@@ -80,34 +80,49 @@ def build_conversational_chain(vectorstore):
     return conversation
 
 
+# === After defining all your functions ===
+
 if "uploaded_pdf" in st.session_state:
     pdf_file = st.session_state["uploaded_pdf"]
-    text = extract_text_from_pdf(pdf_file)
-    documents = split_text(text)
-    vectorstore = create_vector_store(documents)
-    conversation_chain = build_conversational_chain(vectorstore)
-    # Initialize chat history
+
+    if "vectorstore" not in st.session_state:
+        text = extract_text_from_pdf(pdf_file)
+        documents = split_text(text)
+        st.session_state["vectorstore"] = create_vector_store(documents)
+
+    vectorstore = st.session_state["vectorstore"]
+
+    if "conversation_chain" not in st.session_state:
+        st.session_state["conversation_chain"] = build_conversational_chain(vectorstore)
+
+    conversation_chain = st.session_state["conversation_chain"]
+
+    # Initialize chat history if needed
     if "messages" not in st.session_state:
         st.session_state.messages = []
-    
-    # Display previous messages
+
+    # Display previous chat messages
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(f"<span style='color:{font_color}'>{message['content']}</span>", unsafe_allow_html=True)
-    
-    # React to user input
-    if prompt := st.chat_input("What is up?"):
+
+    # Handle new user prompt
+    if prompt := st.chat_input("Ask me something about your PDF"):
         st.chat_message("user").markdown(f"<span style='color:{font_color}'>{prompt}</span>", unsafe_allow_html=True)
         st.session_state.messages.append({"role": "user", "content": prompt})
+
+        # 🔍 Bot response
         response = conversation_chain.invoke({"question": prompt})
-    
-        response = f"Bot: {response["answer"]}"
+        response_text = f"Bot: {response['answer']}"
+
         with st.chat_message("assistant"):
-            st.markdown(f"<span style='color:{font_color}'>{response}</span>", unsafe_allow_html=True)
-        st.session_state.messages.append({"role": "assistant", "content": response})
-    
+            st.markdown(f"<span style='color:{font_color}'>{response_text}</span>", unsafe_allow_html=True)
+
+        st.session_state.messages.append({"role": "assistant", "content": response_text})
+
 else:
-    pass
+    st.warning("Please upload a PDF from the homepage to begin.")
+
 
 
 
