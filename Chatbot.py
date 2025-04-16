@@ -79,7 +79,7 @@ def build_conversational_chain(vectorstore):
 
 if "uploaded_pdf" in st.session_state:
     pdf_file = st.session_state["uploaded_pdf"]
-    text = extract_text_from_pdf(pdf_path)
+    text = extract_text_from_pdf(pdf_file)
     documents = split_text(text)
     vectorstore = create_vector_store(documents)
     conversation_chain = build_conversational_chain(vectorstore)
