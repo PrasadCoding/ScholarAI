@@ -1,8 +1,6 @@
-streamlit>=1.26.0
-streamlit-option-menu
-PyPDF2
+streamlit
 langchain
-langchain_openai
-langchain_community
-faiss-cpu
 openai
+faiss-cpu
+PyMuPDF
+tiktoken
