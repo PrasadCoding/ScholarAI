@@ -10,7 +10,7 @@ from langchain.chains import ConversationalRetrievalChain
 
 # Load OpenAI API key from environment variable or .env file
 import os
-os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"] # Replace with env loading in production
+os.environ["OPENAI_API_KEY"] = "your-openai-key"  # Replace with env loading in production
 
 # --- Styling and Layout ---
 col1, col2 = st.columns([4, 1])
