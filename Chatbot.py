@@ -12,7 +12,7 @@ os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
 col1, col2 = st.columns([4, 1])
 with col1:
-    st.title("ScholarAI")
+    st.title("Ask Your Paper")
 with col2:
     on = st.toggle("🌗")
 
