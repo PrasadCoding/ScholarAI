@@ -55,11 +55,9 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
-# Always show button
-col1, col2, col3 = st.columns([2, 1, 2])
-with col2:
-    if st.button("Go to Chat 💬"):
-        if "uploaded_pdf" in st.session_state:
-            st.switch_page("Chatbot.py")
-        else:
-            st.warning("📄 Please upload a PDF before proceeding.")
+
+if st.button("Go to Chat 💬"):
+    if "uploaded_pdf" in st.session_state:
+        st.switch_page("Chatbot.py")
+    else:
+        st.warning("📄 Please upload a PDF before proceeding.")
