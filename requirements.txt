@@ -1,6 +1,7 @@
 streamlit
 langchain
 langchain_openai 
+langchain-community
 openai
 faiss-cpu
 PyMuPDF
