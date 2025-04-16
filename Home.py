@@ -50,7 +50,7 @@ st.write("")
 st.markdown("""
     <style>
     div.stButton > button {
-        color: red; /* Change this to any color you want */
+        color: #2C3E50;
         font-weight: bold;
     }
     </style>
