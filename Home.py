@@ -44,10 +44,10 @@ uploaded_file = st.file_uploader("", type="pdf")
 
 if uploaded_file:
     st.session_state["uploaded_pdf"] = uploaded_file
-    st.success("✅ PDF uploaded successfully!")
 
-    if st.button("Go to Chatbot 💬"):
+# Always show button
+if st.button("Go to Chatbot 💬"):
+    if "uploaded_pdf" in st.session_state:
         st.switch_page("Chatbot.py")
-
-else:
-    st.info("📄 Please upload a PDF file to get started.")
+    else:
+        st.warning("📄 Please upload a PDF before proceeding.")
