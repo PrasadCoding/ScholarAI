@@ -48,7 +48,7 @@ if uploaded_file:
 # Always show button
 col1, col2, col3 = st.columns([2, 1, 2])
 with col2:
-    if st.button("Go to Chatbot 💬"):
+    if st.button("Go to Chatbot \u00A0 💬"):
         if "uploaded_pdf" in st.session_state:
             st.switch_page("Chatbot.py")
         else:
