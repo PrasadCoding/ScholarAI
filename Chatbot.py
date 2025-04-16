@@ -83,29 +83,30 @@ if "uploaded_pdf" in st.session_state:
     documents = split_text(text)
     vectorstore = create_vector_store(documents)
     conversation_chain = build_conversational_chain(vectorstore)
+    # Initialize chat history
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+    
+    # Display previous messages
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(f"<span style='color:{font_color}'>{message['content']}</span>", unsafe_allow_html=True)
+    
+    # React to user input
+    if prompt := st.chat_input("What is up?"):
+        st.chat_message("user").markdown(f"<span style='color:{font_color}'>{prompt}</span>", unsafe_allow_html=True)
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        response = conversation_chain.invoke({"question": prompt})
+    
+        response = f"Bot: {response["answer"]}"
+        with st.chat_message("assistant"):
+            st.markdown(f"<span style='color:{font_color}'>{response}</span>", unsafe_allow_html=True)
+        st.session_state.messages.append({"role": "assistant", "content": response})
     
 else:
     pass
 
 
 
-# Initialize chat history
-if "messages" not in st.session_state:
-    st.session_state.messages = []
 
-# Display previous messages
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(f"<span style='color:{font_color}'>{message['content']}</span>", unsafe_allow_html=True)
-
-# React to user input
-if prompt := st.chat_input("What is up?"):
-    st.chat_message("user").markdown(f"<span style='color:{font_color}'>{prompt}</span>", unsafe_allow_html=True)
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    response = conversation_chain.invoke({"question": prompt})
-
-    response = f"Bot: {response["answer"]}"
-    with st.chat_message("assistant"):
-        st.markdown(f"<span style='color:{font_color}'>{response}</span>", unsafe_allow_html=True)
-    st.session_state.messages.append({"role": "assistant", "content": response})
 
