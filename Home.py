@@ -45,6 +45,8 @@ uploaded_file = st.file_uploader("", type="pdf")
 if uploaded_file:
     st.session_state["uploaded_pdf"] = uploaded_file
 
+st.write("")
+
 # Always show button
 col1, col2, col3 = st.columns([2, 1, 2])
 with col2:
