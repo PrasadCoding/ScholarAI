@@ -1,5 +1,4 @@
 import streamlit as st
-from io import BytesIO
 import fitz  # PyMuPDF
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
@@ -7,106 +6,85 @@ from langchain.vectorstores import FAISS
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
-
-# Load OpenAI API key from environment variable or .env file
 import os
-os.environ["OPENAI_API_KEY"] = "your-openai-key"  # Replace with env loading in production
 
-# --- Styling and Layout ---
+# Load API key from Streamlit secrets
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+
+# UI Title
+st.title("📄 Chat with your PDF")
+
+# === Theme toggle (optional) ===
 col1, col2 = st.columns([4, 1])
-with col1:
-    st.title("ScholarAI")
 with col2:
     on = st.toggle("🌗")
-
 if on:
     theme_color = "#2C3E50"
     font_color = "#ECF0F1"
-    user_bg = "#34495E"
-    bot_bg = "#1ABC9C"
 else:
     theme_color = "#ECF0F1"
     font_color = "#2C3E50"
-    user_bg = "#BDC3C7"
-    bot_bg = "#3498DB"
 
-st.markdown(f"""
-<style>
-    .stApp {{ background-color: {theme_color}; color: {font_color}; }}
-    .message-box {{
-        border-radius: 10px;
-        padding: 10px;
-        margin: 5px 0;
-        max-width: 75%;
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-color: {theme_color};
+        color: {font_color};
     }}
-    .user-msg {{ background-color: {user_bg}; align-self: flex-end; }}
-    .bot-msg {{ background-color: {bot_bg}; align-self: flex-start; }}
-</style>
-""", unsafe_allow_html=True)
+    </style>
+    """, unsafe_allow_html=True
+)
 
-# --- RAG Pipeline Functions ---
-def extract_text_from_pdf(file_obj):
-    doc = fitz.open(stream=file_obj, filetype="pdf")
+# === PDF Upload ===
+uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
+
+@st.cache_data(show_spinner="Extracting and indexing PDF...")
+def process_pdf(file):
+    # Step 1: Extract text
+    doc = fitz.open(stream=file.read(), filetype="pdf")
     text = ""
     for page in doc:
         text += page.get_text()
-    return text
 
-def split_text(text, chunk_size=500, chunk_overlap=100):
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap
-    )
-    return splitter.create_documents([text])
+    # Step 2: Chunk it
+    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+    docs = splitter.create_documents([text])
 
-def create_vector_store(documents):
+    # Step 3: Create vectorstore
     embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
-    vectorstore = FAISS.from_documents(documents, embeddings)
+    vectorstore = FAISS.from_documents(docs, embeddings)
     return vectorstore
 
-def build_conversational_chain(vectorstore):
-    llm = ChatOpenAI(model_name="gpt-3.5-turbo")
-    memory = ConversationBufferMemory(
-        memory_key="chat_history",
-        return_messages=True
-    )
-    conversation = ConversationalRetrievalChain.from_llm(
-        llm=llm,
-        retriever=vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 3}),
-        memory=memory
-    )
-    return conversation
+if uploaded_file:
+    vectorstore = process_pdf(uploaded_file)
 
-# --- Check for uploaded PDF ---
-if "uploaded_pdf" not in st.session_state:
-    st.warning("⚠️ Please upload a PDF on the upload page first.")
-else:
-    # --- Initialize chat and process PDF only once ---
-    if "conversation_chain" not in st.session_state:
-        st.info("⏳ Processing PDF and building AI assistant...")
-        pdf_file = st.session_state["uploaded_pdf"]
-        pdf_bytes = pdf_file.read()
-        text = extract_text_from_pdf(BytesIO(pdf_bytes))
-        documents = split_text(text)
-        vectorstore = create_vector_store(documents)
-        st.session_state.conversation_chain = build_conversational_chain(vectorstore)
-        st.session_state.chat_history = []
+    # === Initialize the conversation chain ===
+    if "conversation" not in st.session_state:
+        llm = ChatOpenAI(model_name="gpt-3.5-turbo")
+        memory = ConversationBufferMemory(
+            memory_key="chat_history", return_messages=True
+        )
+        st.session_state.conversation = ConversationalRetrievalChain.from_llm(
+            llm=llm,
+            retriever=vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 3}),
+            memory=memory
+        )
+        st.session_state.messages = []
 
-    # --- Chat UI ---
-    st.markdown("#### Ask a question about your PDF")
+    # === Display chat messages ===
+    for msg in st.session_state.messages:
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
 
-    user_input = st.text_input("Type your question here...", key="user_input")
+    # === Input area ===
+    if prompt := st.chat_input("Ask your PDF anything..."):
+        st.chat_message("user").markdown(prompt)
+        st.session_state.messages.append({"role": "user", "content": prompt})
 
-    if user_input:
-        # Get response from the RAG pipeline
-        response = st.session_state.conversation_chain.invoke({"question": user_input})
-        bot_reply = response["answer"]
+        response = st.session_state.conversation.invoke({"question": prompt})
+        answer = response["answer"]
 
-        # Store in chat history
-        st.session_state.chat_history.append(("user", user_input))
-        st.session_state.chat_history.append(("bot", bot_reply))
-
-    # --- Display Chat Bubbles ---
-    for speaker, msg in st.session_state.chat_history:
-        css_class = "user-msg" if speaker == "user" else "bot-msg"
-        st.markdown(f'<div class="message-box {css_class}">{msg}</div>', unsafe_allow_html=True)
+        with st.chat_message("assistant"):
+            st.markdown(answer)
+        st.session_state.messages.append({"role": "assistant", "content": answer})
