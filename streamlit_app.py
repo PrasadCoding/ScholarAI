@@ -14,25 +14,24 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 
 
-# --- Streamlit Page Configuration ---
-st.set_page_config(page_title="Research Paper RAG Chatbot", page_icon="📚", layout="wide")
+-
+# st.set_page_config(page_title="Research Paper RAG Chatbot", page_icon="📚", layout="wide")
 
 # --- Sidebar ---
 with st.sidebar:
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/OpenAI_Logo.svg/2560px-OpenAI_Logo.svg.png", width=150)
-    st.title("Research Assistant 🤖")
+    st.title("Navigation")
     st.markdown("---")
     
     page = st.radio(
         "Navigate", 
-        ["🏠 Home", "💬 Chatbot", "📄 Paper Summary", "🧠 What is RAG?", "❓ FAQ", "👨‍💻 About"],
+        ["Home", "Chatbot", "Paper Summary", "What is RAG?", "FAQ", "About"],
         label_visibility="collapsed"
     )
     st.markdown("---")
     st.caption("Empowering research, one question at a time.")
 
 # --- Pages ---
-if page == "🏠 Home":
+if page == "Home":
     import streamlit as st
 
     col1, col2 = st.columns([4, 1])
