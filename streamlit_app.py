@@ -96,7 +96,7 @@ if page == "Home":
         else:
             st.warning("📄 Please upload a PDF before proceeding.")
 
-elif page == "💬 Chatbot":
+elif page == "Chatbot":
     os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
     
     col1, col2 = st.columns([4, 1])
@@ -212,7 +212,7 @@ elif page == "💬 Chatbot":
     else:
         st.warning("Please upload a PDF from the homepage to begin.")
 
-elif page == "📄 Paper Summary":
+elif page == "Paper Summary":
     st.title("📄 Paper Summary")
     st.write("""
     Once a paper is uploaded, a brief **summary** will be generated here:
@@ -223,7 +223,7 @@ elif page == "📄 Paper Summary":
     """)
     st.info("Upload a paper in the Chatbot section to see the summary here!")
 
-elif page == "🧠 What is RAG?":
+elif page == "What is RAG?":
     st.title("🧠 What is Retrieval-Augmented Generation (RAG)?")
     st.write("""
     **Retrieval-Augmented Generation (RAG)** is a powerful technique where the model first **retrieves relevant documents** and then **generates answers** based on them.
@@ -237,7 +237,7 @@ elif page == "🧠 What is RAG?":
     st.image("https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/rag/rag-architecture.png", width=700)
     st.caption("Image source: Hugging Face")
 
-elif page == "❓ FAQ":
+elif page == "FAQ":
     st.title("❓ Frequently Asked Questions")
     st.write("""
     **Q: Can I upload any PDF?**  
@@ -250,7 +250,7 @@ elif page == "❓ FAQ":
     A: Much less than a normal chatbot, because it uses your uploaded paper as the base.
     """)
 
-elif page == "👨‍💻 About":
+elif page == "About":
     st.title("👨‍💻 About This Project")
     st.write("""
     Built as a part of a **research assistant project**, this app aims to make research papers easier to explore.
