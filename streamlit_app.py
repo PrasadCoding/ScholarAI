@@ -34,7 +34,7 @@ font_color = "#ECF0F1"
 st.markdown(
     f"""
     <style>
-    .stSidebar {{
+    .stSidebar, .stRadio {{
         background-color: {theme_color};
         color: {font_color};
     }}
