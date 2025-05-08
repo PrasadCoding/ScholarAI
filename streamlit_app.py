@@ -29,6 +29,20 @@ with st.sidebar:
     )
     st.markdown("---")
     st.caption("Empowering research, one question at a time.")
+theme_color = "#2C3E50"
+font_color = "#ECF0F1"
+st.markdown(
+    f"""
+    <style>
+    .stSidebar {{
+        background-color: {theme_color};
+        color: {font_color};
+    }}
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
+
 
 # --- Pages ---
 if page == "Home":
