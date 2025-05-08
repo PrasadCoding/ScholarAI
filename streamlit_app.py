@@ -42,18 +42,6 @@ with st.sidebar:
     st.markdown("---")
     st.caption("Empowering research, one question at a time.")
     
-st.markdown(
-    f"""
-    <style>
-    .stSidebar{{
-        background-color: {theme_color};
-        color: {font_color};
-    }}
-    </style>
-    """, 
-    unsafe_allow_html=True
-)
-
 
 # --- Pages ---
 if page == "Home":
@@ -124,19 +112,20 @@ if page == "Home":
 elif page == "Chatbot":
     os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
     
-    col1, col2 = st.columns([4, 1])
-    with col1:
-        st.title("Ask Your Paper")
-    with col2:
-        on = st.toggle("🌗", key="theme_toggle")
+    # col1, col2 = st.columns([4, 1])
+    # with col1:
+    #     st.title("Ask Your Paper")
+    # with col2:
+    #     on = st.toggle("🌗", key="theme_toggle")
     
-    # Set colors based on toggle
-    if on:
-        theme_color = "#2C3E50"  # dark background
-        font_color = "#ECF0F1"   # light text
-    else:
-        theme_color = "#ECF0F1"  # light background
-        font_color = "#2C3E50"   # dark text
+    # # Set colors based on toggle
+    # if on:
+    #     theme_color = "#2C3E50"  # dark background
+    #     font_color = "#ECF0F1"   # light text
+    # else:
+    #     theme_color = "#ECF0F1"  # light background
+    #     font_color = "#2C3E50"   # dark text
+    st.title("Ask Your Paper")
     
     # Apply custom CSS for background and font color
     st.markdown(
