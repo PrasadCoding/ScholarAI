@@ -19,7 +19,19 @@ from langchain.chains import ConversationalRetrievalChain
 
 # --- Sidebar ---
 with st.sidebar:
-    st.title("Navigation")
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        st.title("Navigation")
+    with col2:
+        on = st.toggle("🌗")
+    
+    if on:
+        theme_color = "#2C3E50"
+        font_color = "#ECF0F1"
+    else:
+        theme_color = "#ECF0F1"
+        font_color = "#2C3E50"
+    # st.title("Navigation")
     st.markdown("---")
     
     page = st.radio(
@@ -30,17 +42,12 @@ with st.sidebar:
     st.markdown("---")
     st.caption("Empowering research, one question at a time.")
     
-theme_color = "#2C3E50"
-font_color = "#ECF0F1"
 st.markdown(
     f"""
     <style>
     .stSidebar{{
         background-color: {theme_color};
         color: {font_color};
-    }}
-    .stSidebar .stRadio>label {{
-        color: {font_color} !important;  /* Radio label color */
     }}
     </style>
     """, 
@@ -52,19 +59,19 @@ st.markdown(
 if page == "Home":
     import streamlit as st
 
-    col1, col2 = st.columns([4, 1])
-    with col1:
-        st.title("ScholarAI")
-    with col2:
-        on = st.toggle("🌗")
+    # col1, col2 = st.columns([4, 1])
+    # with col1:
+    #     st.title("ScholarAI")
+    # with col2:
+    #     on = st.toggle("🌗")
     
-    if on:
-        theme_color = "#2C3E50"
-        font_color = "#ECF0F1"
-    else:
-        theme_color = "#ECF0F1"
-        font_color = "#2C3E50"
-    
+    # if on:
+    #     theme_color = "#2C3E50"
+    #     font_color = "#ECF0F1"
+    # else:
+    #     theme_color = "#ECF0F1"
+    #     font_color = "#2C3E50"
+    st.title("ScholarAI")
     st.markdown(
         f"""
         <style>
