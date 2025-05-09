@@ -247,10 +247,11 @@ elif page == "What is RAG?":
     st.markdown("""
     Retrieval-Augmented Generation (RAG) combines information retrieval and natural language generation to provide more accurate and context-aware responses.
     
-    ## Here's how it works in a nutshell:
-    - **Retrieve**: The system searches through your PDF to find the most relevant sections of text.
-    - **Augment**: It adds this retrieved information to your question for better context.
-    - **Generate**: Finally, the system generates a response based on the enriched context, giving you **accurate, context-specific answers**.
+    ### Here's how it works:
+
+    - **Retrieve**: Find the most relevant parts of your PDF.
+    - **Augment**: Combine them with your question for richer context.
+    - **Generate**: Create a precise, context-aware answer.
     """)
     
     # Embedding the YouTube animation video
