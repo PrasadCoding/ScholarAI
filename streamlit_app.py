@@ -110,7 +110,7 @@ if page == "Home":
         else:
             st.warning("📄 Please upload a PDF before proceeding.")
 
-elif page == "Chatbot":
+if page == "Chatbot":
     os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
     
     # col1, col2 = st.columns([4, 1])
