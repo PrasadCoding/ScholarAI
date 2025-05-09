@@ -63,24 +63,7 @@ if page == "Home":
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("###")
-    st.markdown("""<div style="font-size: 18px; color: {font_color};">Upload a PDF</div>""", unsafe_allow_html=True)
-    uploaded_file = st.file_uploader("", type="pdf")
-    
-    if uploaded_file:
-        st.session_state["uploaded_pdf"] = uploaded_file
-    
-    st.write("")
-    
-    st.markdown("""
-        <style>
-        div.stButton > button {
-            color: #2C3E50;
-            font-weight: bold;
-        }
-        </style>
-        """, unsafe_allow_html=True)
-    
+
 
 # elif page == "Chatbot":
 #     os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
