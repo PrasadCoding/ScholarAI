@@ -189,10 +189,7 @@ elif page == "Chatbot":
         unsafe_allow_html=True
     )
     
-    # --- Step 1: Upload PDF ---
-    uploaded_file = st.file_uploader("Upload your PDF", type="pdf")
-
-    # === Step 2: Extract text from PDF ===
+    # === Step 1: Extract text from PDF ===
     def extract_text_from_pdf(pdf_file):
         pdf_file.seek(0)  # 🔥 Reset the pointer to the beginning
         doc = fitz.open(stream=pdf_file.read(), filetype="pdf")
@@ -201,7 +198,7 @@ elif page == "Chatbot":
             text += page.get_text()
         return text
     
-    # === Step 3: Split text into chunks ===
+    # === Step 2: Split text into chunks ===
     def split_text(text, chunk_size=500, chunk_overlap=100):
         splitter = RecursiveCharacterTextSplitter(
             chunk_size=chunk_size,
@@ -209,7 +206,7 @@ elif page == "Chatbot":
         )
         return splitter.create_documents([text])
     
-    # === Step 4: Create embeddings and store in FAISS ===
+    # === Step 3: Create embeddings and store in FAISS ===
     def create_vector_store(documents):
         embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
         vectorstore = FAISS.from_documents(documents, embeddings)
@@ -228,24 +225,30 @@ elif page == "Chatbot":
         )
         return conversation
     
-    # === After defining all your functions ===
+    # === Upload and Reset Chat ===
+    uploaded_file = st.file_uploader("Upload a PDF", type="pdf", key="pdf_upload")
     
     if uploaded_file:
+        # If a new file is uploaded, reset the chat history and conversation chain
         st.session_state["uploaded_pdf"] = uploaded_file
-        pdf_file = uploaded_file
-    
-        if "vectorstore" not in st.session_state:
-            text = extract_text_from_pdf(pdf_file)
-            documents = split_text(text)
-            st.session_state["vectorstore"] = create_vector_store(documents)
-    
+        st.session_state["messages"] = []  # Clear previous chat history
+        st.session_state.pop("vectorstore", None)  # Remove previous vectorstore if exists
+        st.session_state.pop("conversation_chain", None)  # Remove previous conversation chain if exists
+        
+        # Extract text and create new vector store and conversation chain
+        text = extract_text_from_pdf(uploaded_file)
+        documents = split_text(text)
+        st.session_state["vectorstore"] = create_vector_store(documents)
         vectorstore = st.session_state["vectorstore"]
-    
-        if "conversation_chain" not in st.session_state:
-            st.session_state["conversation_chain"] = build_conversational_chain(vectorstore)
-    
+        
+        st.session_state["conversation_chain"] = build_conversational_chain(vectorstore)
         conversation_chain = st.session_state["conversation_chain"]
-    
+
+    if "uploaded_pdf" in st.session_state:
+        # Existing PDF uploaded, proceed with the chat
+        vectorstore = st.session_state["vectorstore"]
+        conversation_chain = st.session_state["conversation_chain"]
+        
         # Initialize chat history if needed
         if "messages" not in st.session_state:
             st.session_state.messages = []
@@ -271,6 +274,7 @@ elif page == "Chatbot":
     
     else:
         st.warning("Please upload a PDF to begin.")
+
 elif page == "Paper Summary":
     st.title("📄 Paper Summary")
     st.write("""
