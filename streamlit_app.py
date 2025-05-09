@@ -238,18 +238,57 @@ elif page == "Paper Summary":
     st.info("Upload a paper in the Chatbot section to see the summary here!")
 
 elif page == "What is RAG?":
-    st.title("🧠 What is Retrieval-Augmented Generation (RAG)?")
-    st.write("""
-    **Retrieval-Augmented Generation (RAG)** is a powerful technique where the model first **retrieves relevant documents** and then **generates answers** based on them.
+    import streamlit as st
+    import time
     
-    It combines the best of both worlds:
-    - **Retrieval** ensures factual grounding.
-    - **Generation** ensures fluent, understandable answers.
+    # Title
+    st.title("📚 Meet Your Smart Librarian (Understanding RAG)")
     
-    This helps the model stay accurate and avoid hallucination — critical when answering about research papers!
+    # Subtitle
+    st.markdown("""
+    Imagine you have a personal librarian who runs to fetch the perfect book and then writes a summary for you!  
+    That's exactly how **RAG (Retrieval-Augmented Generation)** works. 🤖
     """)
-    st.image("https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/rag/rag-architecture.png", width=700)
-    st.caption("Image source: Hugging Face")
+    
+    # User input
+    user_question = st.text_input("📝 Ask something:")
+    
+    # Button to simulate librarian running
+    if st.button("🔍 Let the Librarian Fetch!"):
+        with st.spinner("The Librarian is running through the library... 🏃‍♂️📚"):
+            time.sleep(2)
+    
+        st.success("Librarian found the right book! 📖")
+    
+        # Simulate Progress
+        progress_text = "Summarizing your answer..."
+        my_bar = st.progress(0, text=progress_text)
+    
+        for percent_complete in range(100):
+            time.sleep(0.02)
+            my_bar.progress(percent_complete + 1, text=progress_text)
+    
+        # Final Answer
+        st.markdown("---")
+        st.subheader("💬 Here's what the Librarian says:")
+        if user_question.strip() != "":
+            st.write(f"**Summary based on the best source for:** _'{user_question}'_")
+            st.write("🔹 (This is where the real AI-generated answer would appear.)")
+        else:
+            st.write("You didn't ask a question yet! Try asking something above. 🧐")
+    
+    # Footer - explain RAG simply
+    st.markdown("---")
+    st.info("""
+    **Quick Recap:**
+    
+    - 🔎 **Retrieval** = Find the best document.
+    - ✍️ **Augmentation** = Use it to help answer.
+    - 💬 **Generation** = Give you the final answer!
+    
+    **RAG = Smart Librarian for AI!** 🤓📚
+    """)
+
 
 elif page == "FAQ":
     st.title("❓ Frequently Asked Questions")
