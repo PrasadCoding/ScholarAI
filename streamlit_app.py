@@ -240,8 +240,6 @@ elif page == "Paper Summary":
 
 elif page == "What is RAG?":
     
-import streamlit as st
-
     # Page title and introductory text
     st.title("What is Retrieval-Augmented Generation (RAG)?")
     
