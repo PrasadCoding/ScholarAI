@@ -241,13 +241,13 @@ elif page == "Paper Summary":
 elif page == "What is RAG?":
     
     # Page title and introductory text
-    st.title("What is Retrieval-Augmented Generation (RAG)?")
+    st.title("RAG in Action")
     
     # RAG explanation
     st.markdown("""
     Retrieval-Augmented Generation (RAG) combines information retrieval and natural language generation to provide more accurate and context-aware responses.
     
-    Here's how it works in a nutshell:
+    ## Here's how it works in a nutshell:
     - **Retrieve**: The system searches through your PDF to find the most relevant sections of text.
     - **Augment**: It adds this retrieved information to your question for better context.
     - **Generate**: Finally, the system generates a response based on the enriched context, giving you **accurate, context-specific answers**.
