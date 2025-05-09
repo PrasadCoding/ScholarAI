@@ -263,35 +263,115 @@ elif page == "What is RAG?":
 
     st.subheader("Process Overview")
         
+
     # Initial state
     if 'step' not in st.session_state:
         st.session_state.step = 1
     
-    # Buttons to navigate
-    if st.button("Next Step"):
-        st.session_state.step += 1
-    if st.button("Previous Step"):
-        st.session_state.step -= 1
+    # Consistent example content
+    example_document = """
+    The DeepTransformer model is a new architecture proposed for enhancing deep learning tasks such as NLP. 
+    It improves on traditional transformer models by using multi-layered attention mechanisms and dynamic token embeddings.
+    """
+    
+    chunk_1 = "Introduction to DeepTransformer, a new model for NLP tasks."
+    chunk_2 = "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
+    chunk_3 = "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
+    
+    query_example = "What method is proposed?"
     
     # Show content based on the current step
     if st.session_state.step == 1:
         st.header("Step 1: Upload Document")
-        st.write("Upload your document and extract the text.")
+        st.write(f"""
+        Upload your document in any format (PDF, TXT, etc.), and extract the text for further processing.
+        
+        **Example Document**:
+        ```
+        {example_document}
+        ```
+        """)
+    
     elif st.session_state.step == 2:
         st.header("Step 2: Chunking")
-        st.write("The document is split into smaller chunks.")
+        st.write(f"""
+        The document is split into smaller, meaningful chunks.
+    
+        **Example Chunks**:
+        - **Chunk 1**: "Introduction to DeepTransformer, a new model for NLP tasks."
+        - **Chunk 2**: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
+        - **Chunk 3**: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
+        """)
+    
     elif st.session_state.step == 3:
         st.header("Step 3: Embedding")
-        st.write("Each chunk is embedded into a vector representation.")
+        st.write("""
+        Each chunk is transformed into a high-dimensional vector embedding that captures the semantic meaning of the text.
+        
+        **Example**:
+        ```
+        Chunk 1 Embedding: [0.12, -0.45, 0.78, 0.56, ...]
+        Chunk 2 Embedding: [0.21, -0.33, 0.65, 0.47, ...]
+        Chunk 3 Embedding: [0.19, -0.49, 0.74, 0.50, ...]
+        ```
+        The vectors help compare text based on meaning.
+        """)
+    
     elif st.session_state.step == 4:
         st.header("Step 4: Retrieval")
-        st.write("We retrieve relevant chunks based on the query.")
+        st.write(f"""
+        A user query is compared with the embeddings of the chunks to retrieve the most relevant ones.
+        
+        **Example Query**: "{query_example}"
+        
+        **Retrieved Chunks**:
+        - **Chunk 2**: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
+        - **Chunk 3**: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
+        
+        These chunks are the most relevant to the user's query.
+        """)
+    
     elif st.session_state.step == 5:
         st.header("Step 5: Augmentation")
-        st.write("Combine the retrieved chunks with the query for better context.")
+        st.write(f"""
+        The retrieved chunks are combined with the user’s query to form a rich context for the language model.
+        
+        **Augmented Input**:
+        ```
+        Context:
+        "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
+        
+        Question:
+        "What method is proposed?"
+        ```
+        This helps the language model generate a more accurate and context-aware answer.
+        """)
+    
     elif st.session_state.step == 6:
         st.header("Step 6: Generate Answer")
-        st.write("Generate the answer based on the enriched context.")
+        st.write(f"""
+        The augmented context and query are sent to a language model, which generates a detailed answer.
+        
+        **Example Output**:
+        ```
+        "The paper proposes DeepTransformer, a new transformer-based model designed to improve NLP tasks by using multi-layered attention mechanisms and dynamic token embeddings."
+        ```
+        The model's response is based on the context and the query.
+        """)
+    
+    # Create buttons for navigation
+    col1, col2 = st.columns([1, 2])  # Left column (Previous) and right column (Next)
+    
+    # "Previous" and "Next" buttons in the same line, one on each side
+    with col1:
+        if st.button("Previous Step"):
+            if st.session_state.step > 1:
+                st.session_state.step -= 1
+    
+    with col2:
+        if st.button("Next Step"):
+            if st.session_state.step < 6:
+                st.session_state.step += 1
 
 
 elif page == "FAQ":
