@@ -268,21 +268,13 @@ elif page == "What is RAG?":
     if 'step' not in st.session_state:
         st.session_state.step = 1
     
-    # Consistent example content
-    
-    chunk_1 = "Introduction to DeepTransformer, a new model for NLP tasks."
-    chunk_2 = "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
-    chunk_3 = "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
-    
-    query_example = "What method is proposed?"
-    
     # Show content based on the current step
     if st.session_state.step == 1:
         st.header("Step 1: Upload Document")
         st.write(f"""
         Upload your document in any format (PDF, TXT, etc.), and extract the text for further processing.
-        ```
         **Example Document**:
+        ```
         The DeepTransformer model is a new architecture proposed for enhancing deep learning tasks such as NLP. 
         It improves on traditional transformer models by using multi-layered attention mechanisms and dynamic token embeddings.
         ```
@@ -292,11 +284,12 @@ elif page == "What is RAG?":
         st.header("Step 2: Chunking")
         st.write(f"""
         The document is split into smaller, meaningful chunks.
-        ```
+        
         **Example Chunks**:
-        - **Chunk 1**: "Introduction to DeepTransformer, a new model for NLP tasks."
-        - **Chunk 2**: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
-        - **Chunk 3**: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
+        ```
+        - Chunk 1: "Introduction to DeepTransformer, a new model for NLP tasks."
+        - Chunk 2: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
+        - Chunk 3: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
         ```
         """)
     
@@ -318,12 +311,13 @@ elif page == "What is RAG?":
         st.header("Step 4: Retrieval")
         st.write(f"""
         A user query is compared with the embeddings of the chunks to retrieve the most relevant ones.
-        ```
+
         **Example Query**: "What method is proposed?"
         
         **Retrieved Chunks**:
-        - **Chunk 2**: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
-        - **Chunk 3**: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
+        ```
+        - Chunk 2: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
+        - Chunk 3: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
         ```
         These chunks are the most relevant to the user's query.
         """)
