@@ -262,76 +262,36 @@ elif page == "What is RAG?":
     st.video("https://www.youtube.com/watch?v=QL_pnuEM-gE")  # Replace with your video URL
 
     st.subheader("Process Overview")
+        
+    # Initial state
+    if 'step' not in st.session_state:
+        st.session_state.step = 1
     
-    # Updated tabs
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Upload", "Chunk", "Embed", "Retrieve", "Augment", "Generate"])
+    # Buttons to navigate
+    if st.button("Next Step"):
+        st.session_state.step += 1
+    if st.button("Previous Step"):
+        st.session_state.step -= 1
     
-    with tab1:
+    # Show content based on the current step
+    if st.session_state.step == 1:
         st.header("Step 1: Upload Document")
-        st.write("""
-        Upload a research paper (PDF, TXT, etc.).
-        The document is parsed and text is extracted for processing.
-        """)
-    
-    with tab2:
+        st.write("Upload your document and extract the text.")
+    elif st.session_state.step == 2:
         st.header("Step 2: Chunking")
-        st.write("""
-        The full text is divided into smaller meaningful pieces called chunks.
-    
-        **Example**:
-        ```
-        Chunk 1: "Introduction to deep learning methods..."
-        Chunk 2: "We propose a new transformer-based architecture..."
-        Chunk 3: "Experiments show improvements on benchmarks..."
-        ```
-        """)
-    
-    with tab3:
+        st.write("The document is split into smaller chunks.")
+    elif st.session_state.step == 3:
         st.header("Step 3: Embedding")
-        st.write("""
-        Each chunk is converted into a high-dimensional vector embedding that captures semantic meaning.
-    
-        **Example vector**:
-        ```
-        [0.12, -0.45, 0.78, 0.56, ...]
-        ```
-        """)
-    
-    with tab4:
+        st.write("Each chunk is embedded into a vector representation.")
+    elif st.session_state.step == 4:
         st.header("Step 4: Retrieval")
-        st.write("""
-        When a user inputs a query, the system finds the most relevant chunks by comparing embeddings.
-    
-        **Similarity Example**:
-        - Query: "What method is proposed?"
-        - Retrieved Chunks: Chunk 2, Chunk 3
-        """)
-    
-    with tab5:
+        st.write("We retrieve relevant chunks based on the query.")
+    elif st.session_state.step == 5:
         st.header("Step 5: Augmentation")
-        st.write("""
-        The retrieved chunks are combined (augmented) with the user's query to form an enriched input for the language model.
-    
-        **Example**:
-        ```
-        Context:
-        "We propose a new architecture called DeepTransformer..."
-    
-        Question:
-        "Summarize the method."
-        ```
-        """)
-    
-    with tab6:
+        st.write("Combine the retrieved chunks with the query for better context.")
+    elif st.session_state.step == 6:
         st.header("Step 6: Generate Answer")
-        st.write("""
-        The augmented context and query are sent to a language model (LLM), which generates a detailed, context-aware answer.
-    
-        **Example**:
-        ```
-        "The paper proposes DeepTransformer, a new transformer-based model achieving state-of-the-art results on various benchmarks."
-        ```
-        """)
+        st.write("Generate the answer based on the enriched context.")
 
 
 elif page == "FAQ":
