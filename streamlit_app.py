@@ -273,6 +273,7 @@ elif page == "What is RAG?":
         st.header("Step 1: Upload Document")
         st.write(f"""
         Upload your document in any format (PDF, TXT, etc.), and extract the text for further processing.
+        
         **Example Document**:
         ```
         The DeepTransformer model is a new architecture proposed for enhancing deep learning tasks such as NLP. 
