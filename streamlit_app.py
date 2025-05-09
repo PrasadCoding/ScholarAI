@@ -140,7 +140,12 @@ elif page == "Chatbot":
         st.session_state["conversation_chain"] = build_conversational_chain(vectorstore)
         conversation_chain = st.session_state["conversation_chain"]
 
-        summary_prompt = """
+    if "uploaded_pdf" in st.session_state:
+        # Existing PDF uploaded, proceed with the chat
+        vectorstore = st.session_state["vectorstore"]
+        conversation_chain = st.session_state["conversation_chain"]
+
+                summary_prompt = """
         You are an expert academic assistant.
 
         Given the full text of a research paper, extract and return:
@@ -164,10 +169,6 @@ elif page == "Chatbot":
         summary_response = conversation_chain.invoke({"question": summary_prompt})
         st.session_state["paper_summary"] = summary_response['answer']
 
-    if "uploaded_pdf" in st.session_state:
-        # Existing PDF uploaded, proceed with the chat
-        vectorstore = st.session_state["vectorstore"]
-        conversation_chain = st.session_state["conversation_chain"]
         
         # Initialize chat history if needed
         if "messages" not in st.session_state:
