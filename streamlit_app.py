@@ -240,53 +240,28 @@ elif page == "Paper Summary":
 
 elif page == "What is RAG?":
     
-    import streamlit as st
-    import matplotlib.pyplot as plt
-    import numpy as np
+import streamlit as st
+
+    # Page title and introductory text
+    st.title("What is Retrieval-Augmented Generation (RAG)?")
     
-    # Example flowchart for the RAG process
-    def display_flowchart():
-        st.subheader("How RAG Works:")
-        st.markdown("""
-        1. **Upload PDF**: Your document is split into smaller chunks.
-        2. **Retrieve Information**: Find relevant information based on your question.
-        3. **Augment**: Combine the retrieved chunks with your question.
-        4. **Generate**: Produce an accurate response using the augmented context.
-        """)
-        
-        # Flowchart visual (using a basic example with matplotlib for simplicity)
-        fig, ax = plt.subplots(figsize=(8, 6))
-        ax.annotate('Upload PDF', xy=(0.1, 0.9), xytext=(0.1, 0.8),
-                    arrowprops=dict(facecolor='blue', shrink=0.05))
-        ax.annotate('Retrieve Info', xy=(0.1, 0.7), xytext=(0.1, 0.6),
-                    arrowprops=dict(facecolor='blue', shrink=0.05))
-        ax.annotate('Augment Question', xy=(0.1, 0.5), xytext=(0.1, 0.4),
-                    arrowprops=dict(facecolor='blue', shrink=0.05))
-        ax.annotate('Generate Answer', xy=(0.1, 0.3), xytext=(0.1, 0.2),
-                    arrowprops=dict(facecolor='blue', shrink=0.05))
-    
-        ax.set_axis_off()
-        st.pyplot(fig)
-    
-    # Display Flowchart
-    display_flowchart()
-    
-    # Example Text and Explanation
+    # RAG explanation
     st.markdown("""
-    ### See it in Action:
-    - **Retrieve**: Find similar chunks from your PDF.
-    - **Augment**: Add those chunks to the question.
-    - **Generate**: Answer is generated based on this augmented context.
+    Retrieval-Augmented Generation (RAG) combines information retrieval and natural language generation to provide more accurate and context-aware responses.
     
-    #### Example:
-    Question: **What is supervised learning?**
-    
-    Context Retrieved: "Supervised learning is a machine learning technique that uses labeled data..."
-    
-    Augmented Question: "Here is some context: 'Supervised learning involves labeled data.' Now, explain supervised learning."
-    
-    Answer: "Supervised learning is a type of machine learning where the model is trained on labeled data to predict the output for new data..."
+    Here's how it works in a nutshell:
+    - **Retrieve**: The system searches through your PDF to find the most relevant sections of text.
+    - **Augment**: It adds this retrieved information to your question for better context.
+    - **Generate**: Finally, the system generates a response based on the enriched context, giving you **accurate, context-specific answers**.
     """)
+    
+    # Embedding the YouTube animation video
+    st.markdown("""
+    ### Watch a quick animation to see how RAG works!
+    """)
+    
+    st.video("https://www.youtube.com/watch?v=QL_pnuEM-gE")  # Replace with your video URL
+
 
 
 
