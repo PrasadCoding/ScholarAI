@@ -140,6 +140,30 @@ elif page == "Chatbot":
         st.session_state["conversation_chain"] = build_conversational_chain(vectorstore)
         conversation_chain = st.session_state["conversation_chain"]
 
+        summary_prompt = """
+        You are an expert academic assistant.
+
+        Given the full text of a research paper, extract and return:
+        
+        - ### Title:
+        - ### Authors:
+        - ### Summary:
+        
+        The summary should cover:
+        - Main problem
+        - Methods
+        - Key findings
+        - Significance
+        
+        **Instructions:**
+        - Keep it clear, formal, and within 150–200 words.
+        - If any information is missing, write "Not available."
+        - Do not invent information not present in the paper.
+        """
+        # 🔥 Invoke the chain with the custom prompt
+        summary_response = conversation_chain.invoke({"question": summary_prompt})
+        st.session_state["paper_summary"] = summary_response['answer']
+
     if "uploaded_pdf" in st.session_state:
         # Existing PDF uploaded, proceed with the chat
         vectorstore = st.session_state["vectorstore"]
@@ -172,15 +196,13 @@ elif page == "Chatbot":
         st.warning("Please upload a PDF to begin.")
 
 elif page == "Paper Summary":
-    st.title("📄 Paper Summary")
-    st.write("""
-    Once a paper is uploaded, a brief **summary** will be generated here:
-    - **Title**
-    - **Authors**
-    - **Abstract**
-    - **Key Points**
-    """)
-    st.info("Upload a paper in the Chatbot section to see the summary here!")
+    st.title("Paper Summary")
+
+    if "paper_summary" in st.session_state:
+        st.markdown(st.session_state["paper_summary"], unsafe_allow_html=True)
+    else:
+        st.info("Upload a paper in the Chatbot section to see the summary here!")
+
 
 elif page == "What is RAG?":
     
