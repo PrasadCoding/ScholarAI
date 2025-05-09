@@ -264,15 +264,15 @@ elif page == "What is RAG?":
     st.subheader("Process Overview")
         
 
-    # Initial state
-    if 'step' not in st.session_state:
-        st.session_state.step = 1
+    # Tabs
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
+        ["Upload →", "Chunk →", "Embed →", "Retrieve →", "Augment →", "Generate"]
+    )
     
-    # Show content based on the current step
-    if st.session_state.step == 1:
-        st.header("Step 1: Upload Document")
-        st.write(f"""
-        Upload your document in any format (PDF, TXT, etc.), and extract the text for further processing.
+    with tab1:
+        st.subheader("Step 1: Upload Document")  # <-- Changed to subheader
+        st.write("""
+        The document is uploaded in any format (PDF, TXT, etc.), and the text is extracted for further processing.
         
         **Example Document**:
         ```
@@ -281,21 +281,19 @@ elif page == "What is RAG?":
         ```
         """)
     
-    elif st.session_state.step == 2:
-        st.header("Step 2: Chunking")
-        st.write(f"""
+    with tab2:
+        st.subheader("Step 2: Chunking")
+        st.write("""
         The document is split into smaller, meaningful chunks.
-        
+    
         **Example Chunks**:
-        ```
-        - Chunk 1: "Introduction to DeepTransformer, a new model for NLP tasks."
-        - Chunk 2: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
-        - Chunk 3: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
-        ```
+        - **Chunk 1**: "Introduction to DeepTransformer, a new model for NLP tasks."
+        - **Chunk 2**: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
+        - **Chunk 3**: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
         """)
     
-    elif st.session_state.step == 3:
-        st.header("Step 3: Embedding")
+    with tab3:
+        st.subheader("Step 3: Embedding")
         st.write("""
         Each chunk is transformed into a high-dimensional vector embedding that captures the semantic meaning of the text.
         
@@ -308,24 +306,23 @@ elif page == "What is RAG?":
         The vectors help compare text based on meaning.
         """)
     
-    elif st.session_state.step == 4:
-        st.header("Step 4: Retrieval")
-        st.write(f"""
+    with tab4:
+        st.subheader("Step 4: Retrieval")
+        st.write("""
         A user query is compared with the embeddings of the chunks to retrieve the most relevant ones.
-
+        
         **Example Query**: "What method is proposed?"
         
         **Retrieved Chunks**:
-        ```
-        - Chunk 2: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
-        - Chunk 3: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
-        ```
+        - **Chunk 2**: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
+        - **Chunk 3**: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
+        
         These chunks are the most relevant to the user's query.
         """)
     
-    elif st.session_state.step == 5:
-        st.header("Step 5: Augmentation")
-        st.write(f"""
+    with tab5:
+        st.subheader("Step 5: Augmentation")
+        st.write("""
         The retrieved chunks are combined with the user’s query to form a rich context for the language model.
         
         **Augmented Input**:
@@ -339,9 +336,9 @@ elif page == "What is RAG?":
         This helps the language model generate a more accurate and context-aware answer.
         """)
     
-    elif st.session_state.step == 6:
-        st.header("Step 6: Generate Answer")
-        st.write(f"""
+    with tab6:
+        st.subheader("Step 6: Generate Answer")
+        st.write("""
         The augmented context and query are sent to a language model, which generates a detailed answer.
         
         **Example Output**:
@@ -350,21 +347,6 @@ elif page == "What is RAG?":
         ```
         The model's response is based on the context and the query.
         """)
-    
-    # Create buttons for navigation
-    col1, col2 = st.columns([1, 2])  # Left column (Previous) and right column (Next)
-    
-    # "Previous" and "Next" buttons in the same line, one on each side
-    with col1:
-        if st.button("Previous Step"):
-            if st.session_state.step > 1:
-                st.session_state.step -= 1
-    
-    with col2:
-        if st.button("Next Step"):
-            if st.session_state.step < 6:
-                st.session_state.step += 1
-
 
 elif page == "FAQ":
     st.title("❓ Frequently Asked Questions")
