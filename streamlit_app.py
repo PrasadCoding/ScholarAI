@@ -145,7 +145,7 @@ elif page == "Chatbot":
         vectorstore = st.session_state["vectorstore"]
         conversation_chain = st.session_state["conversation_chain"]
 
-                summary_prompt = """
+        summary_prompt = """
         You are an expert academic assistant.
 
         Given the full text of a research paper, extract and return:
