@@ -12,6 +12,7 @@ from langchain.vectorstores import FAISS
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
+import time
 
 
 
@@ -238,8 +239,6 @@ elif page == "Paper Summary":
     st.info("Upload a paper in the Chatbot section to see the summary here!")
 
 elif page == "What is RAG?":
-    import streamlit as st
-    import time
     
     # Title
     st.title("📚 Meet Your Smart Librarian (Understanding RAG)")
