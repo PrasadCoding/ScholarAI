@@ -216,6 +216,17 @@ elif page == "Chatbot":
         st.warning("Please upload a PDF to begin.")
 
 elif page == "What is RAG?":
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-color: {theme_color};
+            color: {font_color};
+        }}
+        </style>
+        """, 
+        unsafe_allow_html=True
+    )
     
     # Page title and introductory text
     st.title("RAG in Action")
@@ -329,7 +340,18 @@ elif page == "What is RAG?":
         """)
 
 elif page == "Feedback":
-    st.title("📝 Feedback")
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-color: {theme_color};
+            color: {font_color};
+        }}
+        </style>
+        """, 
+        unsafe_allow_html=True
+    )
+    st.title("Feedback")
     
     st.markdown("""
     We would love to hear your thoughts! Please provide feedback on the app below.
@@ -357,7 +379,7 @@ elif page == "Feedback":
     # --- FAQ Section (at the bottom) ---
     st.markdown("---")
     st.write("""
-    **❓ Frequently Asked Questions**
+    **Frequently Asked Questions**
     
     **Q: Can I upload any PDF?**  
     A: Ideally, the PDF should be a research paper with text (not scanned images).
