@@ -240,53 +240,54 @@ elif page == "Paper Summary":
 
 elif page == "What is RAG?":
     
-    # Title
-    st.title("📚 Meet Your Smart Librarian (Understanding RAG)")
+    import streamlit as st
+    import matplotlib.pyplot as plt
+    import numpy as np
     
-    # Subtitle
+    # Example flowchart for the RAG process
+    def display_flowchart():
+        st.subheader("How RAG Works:")
+        st.markdown("""
+        1. **Upload PDF**: Your document is split into smaller chunks.
+        2. **Retrieve Information**: Find relevant information based on your question.
+        3. **Augment**: Combine the retrieved chunks with your question.
+        4. **Generate**: Produce an accurate response using the augmented context.
+        """)
+        
+        # Flowchart visual (using a basic example with matplotlib for simplicity)
+        fig, ax = plt.subplots(figsize=(8, 6))
+        ax.annotate('Upload PDF', xy=(0.1, 0.9), xytext=(0.1, 0.8),
+                    arrowprops=dict(facecolor='blue', shrink=0.05))
+        ax.annotate('Retrieve Info', xy=(0.1, 0.7), xytext=(0.1, 0.6),
+                    arrowprops=dict(facecolor='blue', shrink=0.05))
+        ax.annotate('Augment Question', xy=(0.1, 0.5), xytext=(0.1, 0.4),
+                    arrowprops=dict(facecolor='blue', shrink=0.05))
+        ax.annotate('Generate Answer', xy=(0.1, 0.3), xytext=(0.1, 0.2),
+                    arrowprops=dict(facecolor='blue', shrink=0.05))
+    
+        ax.set_axis_off()
+        st.pyplot(fig)
+    
+    # Display Flowchart
+    display_flowchart()
+    
+    # Example Text and Explanation
     st.markdown("""
-    Imagine you have a personal librarian who runs to fetch the perfect book and then writes a summary for you!  
-    That's exactly how **RAG (Retrieval-Augmented Generation)** works. 🤖
+    ### See it in Action:
+    - **Retrieve**: Find similar chunks from your PDF.
+    - **Augment**: Add those chunks to the question.
+    - **Generate**: Answer is generated based on this augmented context.
+    
+    #### Example:
+    Question: **What is supervised learning?**
+    
+    Context Retrieved: "Supervised learning is a machine learning technique that uses labeled data..."
+    
+    Augmented Question: "Here is some context: 'Supervised learning involves labeled data.' Now, explain supervised learning."
+    
+    Answer: "Supervised learning is a type of machine learning where the model is trained on labeled data to predict the output for new data..."
     """)
-    
-    # User input
-    user_question = st.text_input("📝 Ask something:")
-    
-    # Button to simulate librarian running
-    if st.button("🔍 Let the Librarian Fetch!"):
-        with st.spinner("The Librarian is running through the library... 🏃‍♂️📚"):
-            time.sleep(2)
-    
-        st.success("Librarian found the right book! 📖")
-    
-        # Simulate Progress
-        progress_text = "Summarizing your answer..."
-        my_bar = st.progress(0, text=progress_text)
-    
-        for percent_complete in range(100):
-            time.sleep(0.02)
-            my_bar.progress(percent_complete + 1, text=progress_text)
-    
-        # Final Answer
-        st.markdown("---")
-        st.subheader("💬 Here's what the Librarian says:")
-        if user_question.strip() != "":
-            st.write(f"**Summary based on the best source for:** _'{user_question}'_")
-            st.write("🔹 (This is where the real AI-generated answer would appear.)")
-        else:
-            st.write("You didn't ask a question yet! Try asking something above. 🧐")
-    
-    # Footer - explain RAG simply
-    st.markdown("---")
-    st.info("""
-    **Quick Recap:**
-    
-    - 🔎 **Retrieval** = Find the best document.
-    - ✍️ **Augmentation** = Use it to help answer.
-    - 💬 **Generation** = Give you the final answer!
-    
-    **RAG = Smart Librarian for AI!** 🤓📚
-    """)
+
 
 
 elif page == "FAQ":
