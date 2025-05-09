@@ -261,7 +261,77 @@ elif page == "What is RAG?":
     
     st.video("https://www.youtube.com/watch?v=QL_pnuEM-gE")  # Replace with your video URL
 
-
+    st.subheader("Process Overview")
+    
+    # Updated tabs
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Upload", "Chunk", "Embed", "Retrieve", "Augment", "Generate"])
+    
+    with tab1:
+        st.header("Step 1: Upload Document")
+        st.write("""
+        Upload a research paper (PDF, TXT, etc.).
+        The document is parsed and text is extracted for processing.
+        """)
+    
+    with tab2:
+        st.header("Step 2: Chunking")
+        st.write("""
+        The full text is divided into smaller meaningful pieces called chunks.
+    
+        **Example**:
+        ```
+        Chunk 1: "Introduction to deep learning methods..."
+        Chunk 2: "We propose a new transformer-based architecture..."
+        Chunk 3: "Experiments show improvements on benchmarks..."
+        ```
+        """)
+    
+    with tab3:
+        st.header("Step 3: Embedding")
+        st.write("""
+        Each chunk is converted into a high-dimensional vector embedding that captures semantic meaning.
+    
+        **Example vector**:
+        ```
+        [0.12, -0.45, 0.78, 0.56, ...]
+        ```
+        """)
+    
+    with tab4:
+        st.header("Step 4: Retrieval")
+        st.write("""
+        When a user inputs a query, the system finds the most relevant chunks by comparing embeddings.
+    
+        **Similarity Example**:
+        - Query: "What method is proposed?"
+        - Retrieved Chunks: Chunk 2, Chunk 3
+        """)
+    
+    with tab5:
+        st.header("Step 5: Augmentation")
+        st.write("""
+        The retrieved chunks are combined (augmented) with the user's query to form an enriched input for the language model.
+    
+        **Example**:
+        ```
+        Context:
+        "We propose a new architecture called DeepTransformer..."
+    
+        Question:
+        "Summarize the method."
+        ```
+        """)
+    
+    with tab6:
+        st.header("Step 6: Generate Answer")
+        st.write("""
+        The augmented context and query are sent to a language model (LLM), which generates a detailed, context-aware answer.
+    
+        **Example**:
+        ```
+        "The paper proposes DeepTransformer, a new transformer-based model achieving state-of-the-art results on various benchmarks."
+        ```
+        """)
 
 
 elif page == "FAQ":
