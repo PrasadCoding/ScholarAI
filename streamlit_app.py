@@ -28,7 +28,7 @@ with st.sidebar:
     
     page = st.radio(
         "Navigate", 
-        ["Home", "Chatbot", "Paper Summary", "What is RAG?", "FAQ", "About"],
+        ["Home", "Chatbot", "What is RAG?", "Feedback"],
         label_visibility="collapsed"
     )
     st.markdown("---")
@@ -144,31 +144,6 @@ elif page == "Chatbot":
         # Existing PDF uploaded, proceed with the chat
         vectorstore = st.session_state["vectorstore"]
         conversation_chain = st.session_state["conversation_chain"]
-
-        summary_prompt = """
-        You are an expert academic assistant.
-
-        Given the full text of a research paper, extract and return:
-        
-        - ### Title:
-        - ### Authors:
-        - ### Summary:
-        
-        The summary should cover:
-        - Main problem
-        - Methods
-        - Key findings
-        - Significance
-        
-        **Instructions:**
-        - Keep it clear, formal, and within 150–200 words.
-        - If any information is missing, write "Not available."
-        - Do not invent information not present in the paper.
-        """
-        # 🔥 Invoke the chain with the custom prompt
-        summary_response = conversation_chain.invoke({"question": summary_prompt})
-        st.session_state["paper_summary"] = summary_response['answer']
-
         
         # Initialize chat history if needed
         if "messages" not in st.session_state:
@@ -195,15 +170,6 @@ elif page == "Chatbot":
     
     else:
         st.warning("Please upload a PDF to begin.")
-
-elif page == "Paper Summary":
-    st.title("Paper Summary")
-
-    if "paper_summary" in st.session_state:
-        st.markdown(st.session_state["paper_summary"], unsafe_allow_html=True)
-    else:
-        st.info("Upload a paper in the Chatbot section to see the summary here!")
-
 
 elif page == "What is RAG?":
     
@@ -318,9 +284,37 @@ elif page == "What is RAG?":
         The model's response is based on the context and the query.
         """)
 
-elif page == "FAQ":
-    st.title("❓ Frequently Asked Questions")
+elif page == "Feedback":
+    st.title("📝 Feedback")
+    
+    st.markdown("""
+    We would love to hear your thoughts! Please provide feedback on the app below.
+    """)
+    
+    # Create a text input for feedback
+    feedback = st.text_area("Your Feedback", "Enter your feedback here...")
+    
+    # Submit feedback button
+    submit_button = st.button("Submit Feedback")
+    
+    if submit_button:
+        if feedback:
+            st.success("Thank you for your feedback!")
+            
+            # Write the feedback to a file (this simulates the file writing process)
+            # with open("feedback.txt", "a") as f:
+                # f.write(f"{feedback}\n")  # Save feedback line by line
+            
+            # In a real application, you would push this file to GitHub using an API or Git command.
+            
+        else:
+            st.warning("Please enter your feedback before submitting.")
+    
+    # --- FAQ Section (at the bottom) ---
+    st.markdown("---")
     st.write("""
+    **❓ Frequently Asked Questions**
+    
     **Q: Can I upload any PDF?**  
     A: Ideally, the PDF should be a research paper with text (not scanned images).
     
@@ -330,3 +324,4 @@ elif page == "FAQ":
     **Q: Will it hallucinate?**  
     A: Much less than a normal chatbot, because it uses your uploaded paper as the base.
     """)
+
