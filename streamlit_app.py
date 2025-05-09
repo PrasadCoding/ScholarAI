@@ -225,7 +225,7 @@ elif page == "Chatbot":
         )
         return conversation
     
-    # === File Upload ===
+    # === Upload and Reset Chat ===
     uploaded_file = st.file_uploader("Upload a PDF", type="pdf", key="pdf_upload")
     
     if uploaded_file:
@@ -244,12 +244,8 @@ elif page == "Chatbot":
         st.session_state["conversation_chain"] = build_conversational_chain(vectorstore)
         conversation_chain = st.session_state["conversation_chain"]
 
-        st.session_state["file_uploaded"] = True  # Mark that a file has been uploaded
-
     if "uploaded_pdf" in st.session_state:
-        # Proceed with chat if file is uploaded
-        st.title("Chatbot")
-        
+        # Existing PDF uploaded, proceed with the chat
         vectorstore = st.session_state["vectorstore"]
         conversation_chain = st.session_state["conversation_chain"]
         
@@ -277,9 +273,7 @@ elif page == "Chatbot":
             st.session_state.messages.append({"role": "assistant", "content": response_text})
     
     else:
-        # Display message if no file uploaded
-        if "file_uploaded" not in st.session_state or not st.session_state["file_uploaded"]:
-            st.warning("Please upload a PDF to begin.")
+        st.warning("Please upload a PDF to begin.")
 
 elif page == "Paper Summary":
     st.title("📄 Paper Summary")
