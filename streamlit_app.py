@@ -28,7 +28,7 @@ with st.sidebar:
     
     page = st.radio(
         "Navigate", 
-        ["Home", "Chatbot", "What is RAG?", "Feedback"],
+        ["Home", "Instructions", "Chatbot", "What is RAG?", "Feedback"],
         label_visibility="collapsed"
     )
     st.markdown("---")
@@ -37,7 +37,6 @@ with st.sidebar:
 
 # --- Pages ---
 if page == "Home":
-    st.title("ScholarAI")
     st.markdown(
         f"""
         <style>
@@ -49,7 +48,7 @@ if page == "Home":
         """, 
         unsafe_allow_html=True
     )
-    
+    st.title("ScholarAI")    
     st.markdown('#')
     st.markdown(f"""
     <div style="text-align: center;">
@@ -62,6 +61,51 @@ if page == "Home":
         key points, or analyzing the paper's content. It’s like having a virtual assistant for your academic needs!
     </div>
     """, unsafe_allow_html=True)
+
+elif page == "Instructions":
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-color: {theme_color};
+            color: {font_color};
+        }}
+        </style>
+        """, 
+        unsafe_allow_html=True
+    )
+    st.title("How to Use ScholarAI")
+
+    st.markdown("""
+    ### Welcome to ScholarAI
+
+    ScholarAI helps you interact with research papers using AI. Follow these steps:
+
+    1. **Upload Your PDF**  
+       - Go to the **Chatbot** page and upload a research paper in PDF format.
+       - The app will extract the text from the uploaded paper.
+
+    2. **Ask Your Questions**  
+       - Once uploaded, ask questions about the paper in the chat interface.
+       - ScholarAI will provide answers based on the content of the paper.
+
+    3. **Retrieve Answers**  
+       - The app uses Retrieval-Augmented Generation (RAG) to find relevant sections and generate accurate responses.
+
+    4. **Learn About RAG**  
+       - Visit the **What is RAG?** page for more information about how the app works.
+
+    5. **Provide Feedback**  
+       - Go to the **Feedback** page to share suggestions or comments.
+
+    ### Tips:
+    - Ensure the uploaded PDF has clear, readable text.
+    - Be specific with your questions for more accurate answers.
+    - ScholarAI is optimized for academic content.
+
+    Happy researching!
+    """)
+
     
 
 elif page == "Chatbot":
