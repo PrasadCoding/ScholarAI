@@ -106,7 +106,7 @@ if page == "Home":
     
     if st.button("Go to Chat 💬"):
         if "uploaded_pdf" in st.session_state:
-            st.switch_page("Chatbot.py")
+            page = "Chatbot"
         else:
             st.warning("📄 Please upload a PDF before proceeding.")
 
@@ -287,9 +287,11 @@ elif page == "What is RAG?":
         The document is split into smaller, meaningful chunks.
     
         **Example Chunks**:
-        - **Chunk 1**: "Introduction to DeepTransformer, a new model for NLP tasks."
-        - **Chunk 2**: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
-        - **Chunk 3**: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
+        ```
+        - Chunk 1: "Introduction to DeepTransformer, a new model for NLP tasks."
+        - Chunk 2: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
+        - Chunk 3: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
+        ```
         """)
     
     with tab3:
@@ -314,9 +316,10 @@ elif page == "What is RAG?":
         **Example Query**: "What method is proposed?"
         
         **Retrieved Chunks**:
-        - **Chunk 2**: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
-        - **Chunk 3**: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
-        
+        ```
+        - Chunk 2: "DeepTransformer improves traditional transformer models using multi-layered attention mechanisms."
+        - Chunk 3: "Our experiments show that DeepTransformer outperforms state-of-the-art models on NLP tasks."
+        ```
         These chunks are the most relevant to the user's query.
         """)
     
